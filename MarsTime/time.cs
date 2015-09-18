@@ -16,19 +16,34 @@ namespace MarsTime
         public int Mhour
         {
             get { return _mhour; }
-            set { _mhour = value; }
+            set
+            {
+                if (value < 0 || value >= 25) throw new ArgumentException("Eine angegebene Stunde ist falsch");
+                _mhour = value;
+            }
         }
 
         public int Mminute
         {
             get { return _mminute; }
-            set { _mminute = value; }
+            set 
+            {
+                if (value < 0 || value >= 100) throw new ArgumentException("Eine angegebene Minute ist falsch");
+                _mminute = value;   
+            }
         }
 
         public time(int h, int min)
         {
             Mhour = h;
             Mminute = min;
+        }
+
+        public double GetAbsoluteTime()
+        {
+            
+            return Convert.ToDouble(Mhour) + (Mminute / 100d);
+
         }
 
         
