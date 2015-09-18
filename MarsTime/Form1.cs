@@ -30,18 +30,19 @@ namespace MarsTime
 
                 MessageBox.Show(intervall.GetIntervallState(int1, int2));
             }
-            catch (ArgumentOutOfRangeException)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ungültige Eingabe!");
+                if (ex is ArgumentOutOfRangeException || ex is FormatException)
+                {
+                    MessageBox.Show("Ungültige Eingabe!");
+                    return;
+                }
+                else if (ex is ArgumentException)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
 
-            catch (ArgumentException i)
-            {
-                MessageBox.Show(i.Message);
-            }
-
-            
-            
         }
 
         private void btn_ResetForm_Click(object sender, EventArgs e) {
