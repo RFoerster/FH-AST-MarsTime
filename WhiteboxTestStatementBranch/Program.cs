@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WhiteboxTestStatementBranch
 {
@@ -10,14 +6,22 @@ namespace WhiteboxTestStatementBranch
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Geburtsdatum des Klettergartenbesuchers?");
-            DateTime Geburtsdatum = new DateTime();
-            DateTime today = new DateTime();
-            today = DateTime.Now;
-            try   { Geburtsdatum = DateTime.Parse("31.12.1991");}
-            catch (FormatException) {Console.WriteLine("Ungültiges Datum!");}
-            Console.WriteLine("Du bist {0} Jahre alt!", today.Subtract(Geburtsdatum).ToString);
+            Boolean allowed;
+            Console.Write("Alter des Klettergartenbesuchers?");
+            int alter = Convert.ToInt32(Console.ReadLine());
+            if (alter >= 16) { allowed = true;}
+            else {
+                Console.Write("Gibt es die Erlaubnis eines Erziehungsberechtigten? (y/n)");
+                if (Console.ReadLine().ToUpper() == "Y") {allowed = true;}
+                else {allowed = false;}
+            };
+            Einlass(allowed);
             Console.ReadLine();
+        }
+        public static void Einlass(Boolean a)
+        {
+            if (a) { Console.WriteLine("Erlaubt!"); }
+            else { Console.WriteLine("Nicht erlaubt!"); }
         }
     }
 }
